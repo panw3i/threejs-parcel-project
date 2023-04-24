@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { gsap } from 'gsap';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 // 创建场景
 const scene = new THREE.Scene();
@@ -49,12 +50,20 @@ timeline.to(cube.rotation, {
   repeat: -1, // 无限循环
 });
 
+const controls = new OrbitControls(camera, renderer.domElement); // 创建控制器
+controls.enableDamping = true; // 启用阻尼效果
+controls.dampingFactor = 0.01; // 设置阻尼系数（数值越大，阻尼效果越明显
 // 动画循环
 function animate() {
-  requestAnimationFrame(animate);
+
+  // 更新控制器
+  controls.update();
 
   // 渲染场景
   renderer.render(scene, camera);
+
+  requestAnimationFrame(animate);
+
 }
 
 // 启动动画循环
