@@ -36,8 +36,11 @@ function animate() {
   controls.update();
 
   // Rotate the cube
-  cube.rotation.x += 0.01;
-  cube.rotation.y += 0.01;
+  cube.position.x += 0.01;
+  if (cube.position.x > 2) {
+    cube.position.x = -2;
+  }
+  // cube.rotation.y += 0.01;
 
   renderer.render(scene, camera);
 }
