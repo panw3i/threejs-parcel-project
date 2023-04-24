@@ -21,7 +21,13 @@ const params = {
   speed: 0.01
 };
 
-gui.add(params, 'speed', 0, 0.1);
+gui
+    .add(params, 'speed', 0, 0.1)
+    .max(0.1)
+    .min(0)
+    .onChange((value) => {
+        params.speed = value;
+    });
 
 function animate() {
   requestAnimationFrame(animate);
