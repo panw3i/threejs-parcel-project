@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { AxesHelper } from 'three';
 const axesHelper = new AxesHelper(5);
+const clock = new THREE.Clock();
 
 // Create a scene
 const scene = new THREE.Scene();
@@ -30,19 +31,19 @@ scene.add(axesHelper);
 
 // Render loop
 function animate() {
+  // 在下一帧时调用animate函数
   requestAnimationFrame(animate);
 
-  // Update OrbitControls
+  // 获取时间差
+  const deltaTime = clock.getDelta();
+
+  // 使用时间差来移动立方体
+  cube.position.x += 1 * deltaTime;
+
+  // 更新控制器和渲染场景
   controls.update();
-
-  // Rotate the cube
-  cube.position.x += 0.01;
-  if (cube.position.x > 2) {
-    cube.position.x = -2;
-  }
-  // cube.rotation.y += 0.01;
-
   renderer.render(scene, camera);
 }
+
 
 animate();
